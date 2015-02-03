@@ -1,0 +1,16 @@
+{
+  "name": "rebelmail-lambda-runtime",
+  "version": "0.1.0",
+  "description": "Simple logic for dispatching lambdas",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "author": "elbuo8",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^0.9.0",
+    "aws-sdk": "^2.1.8",
+    "semver": "^4.2.0"
+  }
+}
