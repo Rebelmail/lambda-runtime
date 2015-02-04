@@ -4,7 +4,6 @@
   "description": "Simple logic for dispatching lambdas",
   "main": "lib/router.js",
   "scripts": {
-    "test": "mocha test/*.js"
   },
   "author": "elbuo8",
   "license": "ISC",
@@ -12,5 +11,9 @@
     "async": "^0.9.0",
     "aws-sdk": "^2.1.8",
     "semver": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rebelmail/rebelmail-lambda-runtime.git"
   }
 }
