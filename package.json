@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "description": "Simple logic for dispatching lambdas",
   "main": "lib/router.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "elbuo8",
   "license": "ISC",
   "dependencies": {
     "async": "^0.9.0",
     "aws-sdk": "^2.1.8",
+    "fallback": "^1.0.1",
     "semver": "^4.2.0"
   },
   "repository": {
