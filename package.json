@@ -2,8 +2,10 @@
   "name": "rebelmail-lambda-runtime",
   "version": "0.1.2",
   "description": "Simple logic for dispatching lambdas",
-  "main": "lib/router.js",
-  "scripts": {},
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "mocha test/*.test.js"
+  },
   "author": "elbuo8",
   "license": "ISC",
   "dependencies": {
@@ -15,5 +17,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/rebelmail/rebelmail-lambda-runtime.git"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2"
   }
 }
