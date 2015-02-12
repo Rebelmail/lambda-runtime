@@ -54,7 +54,7 @@ describe('LambdaRouter', function() {
       });
     });
 
-    it('should return null if no lambda matches', function(done) {
+    it('should return an error if no lambda matches', function(done) {
       var stub = sinon.stub(router, 'buildLambda', function(region) {
         return {
           listFunctions: function(params, cb) {
@@ -69,8 +69,7 @@ describe('LambdaRouter', function() {
         };
       });
       router.findMatchingLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
-        assert.ifError(err);
-        assert.equal(result, null);
+        assert.equal(err.message, 'No lambda matches found forname-staging-0.*.* in region');
         done();
       });
     });
