@@ -1,16 +1,16 @@
-var LambdaRouter = require('../lib/main.js');
+var LambdaRuntime = require('../lib/main.js');
 var assert = require('assert');
 var sinon = require('sinon');
 
 
-describe('LambdaRouter', function() {
+describe('LambdaRuntime', function() {
   it('has version', function() {  
-    assert.equal(new LambdaRouter().version, '0.2.1');
+    assert.equal(new LambdaRuntime().version, '0.2.1');
   });
 
   describe('#constructor', function() {
     it('should not return null', function() {
-      assert(new LambdaRouter('test', 'test'));           
+      assert(new LambdaRuntime('test', 'test'));           
     });
   });
 
@@ -18,7 +18,7 @@ describe('LambdaRouter', function() {
     var router;
     var lambda;
     beforeEach(function() {
-      router = new LambdaRouter('aws_key', 'aws_secret');
+      router = new LambdaRuntime('aws_key', 'aws_secret');
       lambda = {};
     });
     
@@ -41,7 +41,7 @@ describe('LambdaRouter', function() {
   describe('#findMatchingLambda', function() {
     var router;
     beforeEach(function() {
-      router = new LambdaRouter('aws_key', 'aws_secret');
+      router = new LambdaRuntime('aws_key', 'aws_secret');
     });
     
     it('should callback with error if AWS fails', function(done) {
@@ -107,7 +107,7 @@ describe('LambdaRouter', function() {
   describe('#invokeFallback', function () {
     var router;
     beforeEach(function() {
-      router = new LambdaRouter('aws_key', 'aws_secret');
+      router = new LambdaRuntime('aws_key', 'aws_secret');
     });
 
     it('should return false if lambdas were null', function(done) {
@@ -152,7 +152,7 @@ describe('LambdaRouter', function() {
   describe('#invokeAsync', function() {
     var router;
     beforeEach(function() {
-      router = new LambdaRouter('aws_key', 'aws_secret');
+      router = new LambdaRuntime('aws_key', 'aws_secret');
     });
 
     it('should return the lambda executed', function (done) {
