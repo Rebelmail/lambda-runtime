@@ -1,6 +1,6 @@
 # RebelMail Lambda Runtime
 
-// Placeholder for some gif from Mot
+![rebelmail-lambda-runtime](../master/rebelmail-lambda-runtime.gif?raw=true)
 
 Simple package to allow versioning in AWS Lambdas as well as basic fallback.
 
