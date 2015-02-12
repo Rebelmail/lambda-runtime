@@ -5,7 +5,7 @@ var sinon = require('sinon');
 
 describe('LambdaRuntime', function() {
   it('has version', function() {  
-    assert.equal(new LambdaRuntime().version, '0.2.1');
+    assert.equal(new LambdaRuntime().version, '0.2.2');
   });
 
   describe('#constructor', function() {
