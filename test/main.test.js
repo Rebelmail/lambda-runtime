@@ -4,6 +4,10 @@ var sinon = require('sinon');
 
 
 describe('LambdaRouter', function() {
+  it('has version', function() {  
+    assert.equal(new LambdaRouter().version, '0.2.1');
+  });
+
   describe('#constructor', function() {
     it('should not return null', function() {
       assert(new LambdaRouter('test', 'test'));           

@@ -1,6 +1,6 @@
 {
   "name": "rebelmail-lambda-runtime",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple logic for dispatching lambdas",
   "main": "lib/main.js",
   "scripts": {
