@@ -26,6 +26,8 @@ var version = supportedLambdas[emailVersion];
 var lambdaName = "rebelmail-lambda-differ";
 var env = process.env.NODE_ENV;
 
+// payload must be of the following:
+new Buffer('...') || 'STRING_VALUE' || streamObject
 
 lambda.invokeAsync(lambdaName, env, version, ['us-east-1', 'us-west-2'], payload, function(err, data) {
   console.log(err, data);
