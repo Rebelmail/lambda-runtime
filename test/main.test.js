@@ -4,13 +4,13 @@ var sinon = require('sinon');
 
 
 describe('LambdaRuntime', function() {
-  it('has version', function() {  
-    assert.equal(new LambdaRuntime().version, '0.2.2');
+  it('has version', function() {
+    assert.equal(new LambdaRuntime().version, '0.2.3');
   });
 
   describe('#constructor', function() {
     it('should not return null', function() {
-      assert(new LambdaRuntime('test', 'test'));           
+      assert(new LambdaRuntime('test', 'test'));
     });
   });
 
@@ -21,7 +21,8 @@ describe('LambdaRuntime', function() {
       router = new LambdaRuntime('aws_key', 'aws_secret');
       lambda = {};
     });
-    
+
+
     it('should throw is lambda name is invalid', function() {
       lambda.FunctionName = 'a-production';
       assert.throws(router.isValidLambda(lambda, 'test', 'env', '0.1'));
@@ -38,12 +39,33 @@ describe('LambdaRuntime', function() {
     });
   });
 
+  describe('#latestLambda', function() {
+    var router;
+    var lambdas;
+    beforeEach(function() {
+      router = new LambdaRuntime('aws_key', 'aws_secret');
+      lambdas = [
+        {
+          'name': 'name-staging-0-0-3'
+        },
+        {
+          'name': 'name-staging-0-1-1'
+        }
+      ];
+    });
+
+    it('should return the latest version of the lambda', function() {
+      var latest = router.latestLambda(lambdas);
+      assert.equal(latest.name, 'name-staging-0-1-1');
+    });
+  });
+
   describe('#findMatchingLambda', function() {
     var router;
     beforeEach(function() {
       router = new LambdaRuntime('aws_key', 'aws_secret');
     });
-    
+
     it('should callback with error if AWS fails', function(done) {
       var stub = sinon.stub(router, 'buildLambda', function(region) {
         return {
@@ -73,7 +95,7 @@ describe('LambdaRuntime', function() {
         };
       });
       router.findMatchingLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
-        assert.equal(err.message, 'No lambda matches found forname-staging-0.*.* in region');
+        assert.equal(result, null);
         done();
       });
     });
