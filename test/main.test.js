@@ -60,21 +60,21 @@ describe('LambdaRuntime', function() {
     });
   });
 
-  describe('#findMatchingLambda', function() {
+  describe('#findLatestLambda', function() {
     var router;
     beforeEach(function() {
       router = new LambdaRuntime('aws_key', 'aws_secret');
     });
 
     it('should callback with error if AWS fails', function(done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
         return {
           listFunctions: function(params, cb) {
             cb(new Error('AWS blew up'), null);
           }
         };
       });
-      router.findMatchingLambda('a', 'b', 'c', 'd', function(err, result) {
+      router.findLatestLambda('a', 'b', 'c', 'd', function(err, result) {
         assert(err);
         done();
       });
@@ -94,7 +94,7 @@ describe('LambdaRuntime', function() {
           }
         };
       });
-      router.findMatchingLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
+      router.findLatestLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
         assert.equal(result, null);
         done();
       });
@@ -117,7 +117,7 @@ describe('LambdaRuntime', function() {
           }
         };
       });
-      router.findMatchingLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
+      router.findLatestLambda('name', 'staging', '0.*.*', 'region', function(err, result) {
         assert.ifError(err);
         assert(result);
         done();
@@ -159,7 +159,7 @@ describe('LambdaRuntime', function() {
       var stub = sinon.stub(router, 'buildLambda', function(region) {
         return {
           invokeAsync: function(payload, cb) {
-            cb(null, 'i got executed');
+            cb(null, {status: 202});
           }
         };
       });
@@ -177,11 +177,31 @@ describe('LambdaRuntime', function() {
       router = new LambdaRuntime('aws_key', 'aws_secret');
     });
 
+    it('should callback with an error if no lambda was executed', function(done) {
+      sinon.stub(router, 'buildLambda', function(region) {
+        return {
+          listFunctions: function(params, cb) {
+            return cb(null, {
+              Functions: [
+                {
+                  FunctionName: 'name-staging-0-1-1'
+                }
+              ]
+            });
+          }
+        };
+      });
+      router.invokeAsync('name', 'production', '0.0.*', ['us-west-2'], '{}', function(err, lambda) {
+        assert.equal(err.toString(), new Error('no lambda was able to execute').toString());
+        done();
+      });
+    });
+
     it('should return the lambda executed', function (done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
         return {
           invokeAsync: function(payload, cb) {
-            cb(null, payload.FunctionName);
+            cb(null, {status:202});
           },
           listFunctions: function(params, cb) {
             return cb(null, {
@@ -200,7 +220,7 @@ describe('LambdaRuntime', function() {
       router.invokeAsync('name', 'staging', '0.1.*', ['us-west-2'], {},function (err, res) {
         assert.ifError(err);
         assert(res);
-        assert.equal(res, 'name-staging-0-1-1');
+        assert.deepEqual(res, {name: 'name-staging-0-1-1', region: 'us-west-2'});
         done();
       });
     });
