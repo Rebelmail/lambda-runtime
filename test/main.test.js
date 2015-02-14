@@ -159,7 +159,7 @@ describe('LambdaRuntime', function() {
       var stub = sinon.stub(router, 'buildLambda', function(region) {
         return {
           invokeAsync: function(payload, cb) {
-            cb(null, {status: 202});
+            cb(null, {Status: 202});
           }
         };
       });
@@ -201,7 +201,7 @@ describe('LambdaRuntime', function() {
       sinon.stub(router, 'buildLambda', function(region) {
         return {
           invokeAsync: function(payload, cb) {
-            cb(null, {status:202});
+            cb(null, {Status:202});
           },
           listFunctions: function(params, cb) {
             return cb(null, {
