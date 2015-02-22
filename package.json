@@ -1,13 +1,13 @@
 {
-  "name": "rebelmail-lambda-runtime",
-  "version": "0.2.3",
+  "name": "lambda-runtime",
+  "version": "0.2.4",
   "description": "Simple logic for dispatching lambdas",
   "main": "lib/main.js",
   "scripts": {
     "test": "mocha test/*.test.js"
   },
-  "author": "elbuo8",
-  "license": "ISC",
+  "author": "Yamil Asust @elbuo8",
+  "license": "MIT",
   "dependencies": {
     "async": "^0.9.0",
     "aws-sdk": "^2.1.8",

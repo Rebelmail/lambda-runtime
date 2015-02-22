@@ -1,3 +1,5 @@
+'use strict';
+
 var LambdaRuntime = require('../lib/main.js');
 var assert = require('assert');
 var sinon = require('sinon');
@@ -68,6 +70,7 @@ describe('LambdaRuntime', function() {
 
     it('should callback with error if AWS fails', function(done) {
       sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           listFunctions: function(params, cb) {
             cb(new Error('AWS blew up'), null);
@@ -75,13 +78,15 @@ describe('LambdaRuntime', function() {
         };
       });
       router.findLatestLambda('a', 'b', 'c', 'd', function(err, result) {
+        assert(result == null);
         assert(err);
         done();
       });
     });
 
     it('should return an error if no lambda matches', function(done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           listFunctions: function(params, cb) {
             return cb(null, {
@@ -101,7 +106,8 @@ describe('LambdaRuntime', function() {
     });
 
     it('should return the first match', function(done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           listFunctions: function(params, cb) {
             return cb(null, {
@@ -141,7 +147,8 @@ describe('LambdaRuntime', function() {
     });
 
     it('should return false if lambdas were not called due to AWS', function(done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           invokeAsync: function(payload, cb) {
             cb(new Error('AWS blew up'));
@@ -156,7 +163,8 @@ describe('LambdaRuntime', function() {
     });
 
     it('should return the executed lambda', function(done) {
-      var stub = sinon.stub(router, 'buildLambda', function(region) {
+      sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           invokeAsync: function(payload, cb) {
             cb(null, {Status: 202});
@@ -179,6 +187,7 @@ describe('LambdaRuntime', function() {
 
     it('should callback with an error if no lambda was executed', function(done) {
       sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           listFunctions: function(params, cb) {
             return cb(null, {
@@ -192,6 +201,7 @@ describe('LambdaRuntime', function() {
         };
       });
       router.invokeAsync('name', 'production', '0.0.*', ['us-west-2'], '{}', function(err, lambda) {
+        assert(lambda == null);
         assert.equal(err.toString(), new Error('no lambda was able to execute').toString());
         done();
       });
@@ -199,6 +209,7 @@ describe('LambdaRuntime', function() {
 
     it('should return the lambda executed', function (done) {
       sinon.stub(router, 'buildLambda', function(region) {
+        assert(region);
         return {
           invokeAsync: function(payload, cb) {
             cb(null, {Status:202});
