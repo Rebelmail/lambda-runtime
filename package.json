@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rebelmail/rebelmail-lambda-runtime.git"
+    "url": "git://github.com/rebelmail/lambda-runtime.git"
   },
   "devDependencies": {
     "mocha": "^2.1.0",
