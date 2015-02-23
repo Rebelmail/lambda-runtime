@@ -13,17 +13,17 @@ Also, in the case of a Lambda going down in one AZ you have the ability to call 
 
 ```js
 
-var LambdaRouter = require('rebelmail-lambda-runtime');
-var lambda = new LambdaRouter(aws_key, aws_secret);
+var LambdaRouter = require('lambda-runtime');
+var lambda = new LambdaRouter(awsKey, awsSecret);
 
 var supportedLambdas = {
   "2015-02-01": "0.0.*",
   "2016-09-01": "1.3.*"
 };
 
-var version = supportedLambdas[emailVersion];
+var version = supportedLambdas[obj.version];
 
-var lambdaName = "differ";
+var lambdaName = "magic";
 var env = process.env.NODE_ENV;
 var payload = JSON.stringify({});
 
@@ -86,5 +86,7 @@ Once 1 Lambda is successfully executed, the callback will be triggered.
 * `version` - Semantic version to compare against.
 * `payload` - Payload for lambda.
 * `callback(err, lambda)` - If no Errors happened, result can be `false` or a Lambda object. False implies that no Lambda was accepted.
+
+## MIT
 
 ## Enjoy
