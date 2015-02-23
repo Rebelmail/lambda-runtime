@@ -1,6 +1,6 @@
-# RebelMail Lambda Runtime
+# Lambda Runtime
 
-![rebelmail-lambda-runtime](../master/rebelmail-lambda-runtime.gif?raw=true)
+![lambda-runtime](../master/lambda-runtime.gif?raw=true)
 
 Simple package to allow versioning in AWS Lambdas as well as basic fallback.
 
