@@ -6,10 +6,6 @@ var sinon = require('sinon');
 
 
 describe('LambdaRuntime', function() {
-  it('has version', function() {
-    assert.equal(new LambdaRuntime().version, '0.2.3');
-  });
-
   describe('#constructor', function() {
     it('should not return null', function() {
       assert(new LambdaRuntime('test', 'test'));
