@@ -1,6 +1,6 @@
 {
   "name": "lambda-runtime",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Simple logic for dispatching lambdas",
   "main": "lib/main.js",
   "scripts": {
