@@ -2,6 +2,8 @@
 
 ![lambda-runtime](../master/lambda-runtime.gif?raw=true)
 
+[ ![Codeship Status for RebelMail/lambda-runtime](https://codeship.com/projects/9808c770-9d9e-0132-b7e8-4ef4301ddd41/status?branch=master)](https://codeship.com/projects/64542)
+
 Simple package to allow versioning in AWS Lambdas as well as basic fallback.
 
 ## Why?
