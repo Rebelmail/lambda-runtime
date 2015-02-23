@@ -198,7 +198,7 @@ describe('LambdaRuntime', function() {
       });
       router.invokeAsync('name', 'production', '0.0.*', ['us-west-2'], '{}', function(err, lambda) {
         assert(lambda == null);
-        assert.equal(err.toString(), new Error('no lambda was able to execute').toString());
+        assert.equal(err.toString(), new Error('lambda name-production-0.0.* was not able to execute').toString());
         done();
       });
     });
