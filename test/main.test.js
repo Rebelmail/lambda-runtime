@@ -58,6 +58,36 @@ describe('LambdaRuntime', function() {
     });
   });
 
+  describe('#latestLambda 0-0-9 to 0-0-10,12,13 (double digits)', function() {
+    var router;
+    var lambdas;
+    beforeEach(function() {
+      router = new LambdaRuntime('aws_key', 'aws_secret');
+      lambdas = [
+        {
+          'name': 'name-staging-0-0-11'
+        },
+        {
+          'name': 'name-staging-0-0-9'
+        },
+        {
+          'name': 'name-staging-0-0-12'
+        },
+        {
+          'name': 'name-staging-0-0-10'
+        },
+        {
+          'name': 'name-staging-0-0-13'
+        }
+      ];
+    });
+
+    it('should return the latest version of the lambda', function() {
+      var latest = router.latestLambda(lambdas);
+      assert.equal(latest.name, 'name-staging-0-0-13');
+    });
+  });
+
   describe('#findLatestLambda', function() {
     var router;
     beforeEach(function() {
