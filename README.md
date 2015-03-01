@@ -63,7 +63,7 @@ Returns true if the Lambda is compatible with the one being compared with.
 
 * `lambdas` - Array of Lambda names. Ex -> ['name-production-0-2-1', 'name-production-0-1-2'];
 
-Returns the lastest definition of the Lambda.
+Returns the latest definition of the Lambda.
 
 ### `findLatestLambda(functionName, env, version, region, callback)`
 
